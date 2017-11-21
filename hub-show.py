@@ -25,7 +25,7 @@ import time
 from optparse import OptionParser
 
 def optSettings():
-    usage="github-helper :token :owner/:repo [--base-url :url] [-m --mode :(pull|issue)] [--with-body]"
+    usage="hub-show :token :owner/:repo [--base-url :url] [-m --mode :(pull|issue)] [--with-body]"
 
     version = __version__
     parser = OptionParser(usage=usage, version=version)
@@ -64,7 +64,7 @@ class font_color:
     GRN = "\033[1;32m"
     END = "\033[1;m"
 
-class GitHubHelper:
+class HubShow:
     def __init__(self, options, args):
 
         _TOKEN = args[0]
@@ -141,7 +141,7 @@ class GitHubHelper:
 
 if __name__ == '__main__':
     options, args = optSettings()
-    pr = GitHubHelper(options, args)
+    pr = HubShow(options, args)
     if options.mode == "pull":
         pr.pull()
     elif options.mode == "issue":
