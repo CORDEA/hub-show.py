@@ -14,8 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-__Author__  = "Yoshihiro Tanaka <contact@cordea.jp>"
-__date__    = "2016-02-12"
+__Author__ = "Yoshihiro Tanaka <contact@cordea.jp>"
+__date__ = "2016-02-12"
 __version__ = "1.0.0"
 
 import os, sys
@@ -24,45 +24,44 @@ import time
 
 from optparse import OptionParser
 
+
 def optSettings():
-    usage="hub-show :token :owner/:repo [--base-url :url] [-m --mode :(pull|issue)] [--with-body]"
+    usage = "hub-show :token :owner/:repo [--base-url :url] [-m --mode :(pull|issue)] [--with-body]"
 
     version = __version__
     parser = OptionParser(usage=usage, version=version)
-    
-    parser.add_option(
-            "--base-url",
-            action = "store",
-            type = "str",
-            dest = "base_url",
-            default = "https://api.github.com"
-            )
- 
-    parser.add_option(
-            "--with-body",
-            action = "store_true",
-            dest = "body",
-            default = False
-            )
 
     parser.add_option(
-            "-m", "--mode",
-            action = "store",
-            type = "str",
-            dest = "mode",
-            default = "pull"
-            )
+        "--base-url",
+        action="store",
+        type="str",
+        dest="base_url",
+        default="https://api.github.com")
+
+    parser.add_option(
+        "--with-body", action="store_true", dest="body", default=False)
+
+    parser.add_option(
+        "-m",
+        "--mode",
+        action="store",
+        type="str",
+        dest="mode",
+        default="pull")
 
     return parser.parse_args()
+
 
 class bg_color:
     GRN = "\033[1;42m"
     RED = "\033[1;41m"
     END = "\033[1;m"
 
+
 class font_color:
     GRN = "\033[1;32m"
     END = "\033[1;m"
+
 
 class HubShow:
     def __init__(self, options, args):
@@ -75,9 +74,9 @@ class HubShow:
         seg = "repos/"
 
         self.headers = {
-                "Accept": "application/vnd.github.full+json",
-                "Authorization": "token " + _TOKEN
-                }
+            "Accept": "application/vnd.github.full+json",
+            "Authorization": "token " + _TOKEN
+        }
 
         self.url = _BASE + seg + _REP
 
@@ -104,7 +103,7 @@ class HubShow:
             print url
             print " created by " + font_color.GRN + creator + font_color.END
             if assign:
-                print " assignee " + font_color.GRN +  assign + font_color.END
+                print " assignee " + font_color.GRN + assign + font_color.END
             print " issue comments " + str(len(com.json()))
             print " review comments " + str(len(rev.json()))
             if self._BODY:
@@ -132,12 +131,13 @@ class HubShow:
             print url
             print " created by " + font_color.GRN + creator + font_color.END
             if assign:
-                print " assignee " + font_color.GRN +  assign + font_color.END
+                print " assignee " + font_color.GRN + assign + font_color.END
             print " comments " + str(comments)
             if self._BODY:
                 for b in body.split("\n"):
                     print "\t" + b
             print
+
 
 if __name__ == '__main__':
     options, args = optSettings()
