@@ -52,13 +52,13 @@ def optSettings():
     return parser.parse_args()
 
 
-class bg_color:
+class BgColor:
     GRN = "\033[1;42m"
     RED = "\033[1;41m"
     END = "\033[1;m"
 
 
-class font_color:
+class FontColor:
     GRN = "\033[1;32m"
     END = "\033[1;m"
 
@@ -99,11 +99,11 @@ class HubShow:
             time.sleep(0.1)
             rev = requests.get(j["review_comments_url"], headers=self.headers)
 
-            print bg_color.GRN + "# " + title + bg_color.END
+            print BgColor.GRN + "# " + title + BgColor.END
             print url
-            print " created by " + font_color.GRN + creator + font_color.END
+            print " created by " + FontColor.GRN + creator + FontColor.END
             if assign:
-                print " assignee " + font_color.GRN + assign + font_color.END
+                print " assignee " + FontColor.GRN + assign + FontColor.END
             print " issue comments " + str(len(com.json()))
             print " review comments " + str(len(rev.json()))
             if self._BODY:
@@ -127,11 +127,11 @@ class HubShow:
             body = j["body"].encode('utf-8')
             comments = j["comments"]
 
-            print bg_color.RED + "# " + title + bg_color.END
+            print BgColor.RED + "# " + title + BgColor.END
             print url
-            print " created by " + font_color.GRN + creator + font_color.END
+            print " created by " + FontColor.GRN + creator + FontColor.END
             if assign:
-                print " assignee " + font_color.GRN + assign + font_color.END
+                print " assignee " + FontColor.GRN + assign + FontColor.END
             print " comments " + str(comments)
             if self._BODY:
                 for b in body.split("\n"):
