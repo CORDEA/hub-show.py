@@ -14,19 +14,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-__Author__ = "Yoshihiro Tanaka <contact@cordea.jp>"
-__date__ = "2016-02-12"
-__version__ = "1.0.0"
-
-import os, sys
+import os
+import sys
 import requests
 import time
 
 from optparse import OptionParser
 
+__version__ = "1.0.0"
+
 
 def optSettings():
-    usage = "hub-show :token :owner/:repo [--base-url :url] [-m --mode :(pull|issue)] [--with-body]"
+    usage = "hub-show :token :owner/:repo " \
+            "[--base-url :url] [-m --mode :(pull|issue)] [--with-body]"
 
     version = __version__
     parser = OptionParser(usage=usage, version=version)
