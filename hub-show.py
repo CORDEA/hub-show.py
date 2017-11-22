@@ -66,19 +66,20 @@ class FontColor:
 class HubShow:
     def __init__(self, options, args):
 
-        _TOKEN = args[0]
-        _REP = args[1]
-        _BASE = options.base_url
-        self._BODY = options.body
+        token = args[0]
+        repo = args[1]
+        base_url = options.base_url
+
+        self.with_body = options.body
 
         seg = "repos/"
 
         self.headers = {
             "Accept": "application/vnd.github.full+json",
-            "Authorization": "token " + _TOKEN
+            "Authorization": "token " + token
         }
 
-        self.url = _BASE + seg + _REP
+        self.url = base_url + seg + repo
 
     def pull(self):
         r = requests.get(self.url + "/pulls", headers=self.headers)
@@ -106,7 +107,7 @@ class HubShow:
                 print " assignee " + FontColor.GRN + assign + FontColor.END
             print " issue comments " + str(len(com.json()))
             print " review comments " + str(len(rev.json()))
-            if self._BODY:
+            if self.with_body:
                 for b in body.split("\n"):
                     print "\t" + b
             print
@@ -133,7 +134,7 @@ class HubShow:
             if assign:
                 print " assignee " + FontColor.GRN + assign + FontColor.END
             print " comments " + str(comments)
-            if self._BODY:
+            if self.with_body:
                 for b in body.split("\n"):
                     print "\t" + b
             print
